@@ -1,0 +1,70 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "sqlite"
+    url      = env("DATABASE_URL")
+}
+
+model Example {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Beers {
+    vmp_id           String   @id @default(cuid())
+    vmp_name         String?
+    vmp_image        String?
+    vmp_link         String?
+    barcode          String?
+    untappd_bid      String?
+    untappd_brewery  String?
+    untappd_name     String?
+    untappd_image    String?
+    untappd_rating   String?
+    untappd_checkins Int?
+    untappd_link     String?
+    abv              Float?
+    price            Float?
+    style            String?
+    volume           Int?
+    error            String?
+    data             String?
+    active           Boolean?
+    new              Boolean?
+    createdAt        DateTime @default(now())
+    updatedAt        DateTime @updatedAt
+    Stock            Stock[]
+}
+
+model Stores {
+    store_id  String   @id @default(cuid())
+    vmp_id    String   @default(cuid())
+    name      String
+    category  String?
+    address   String?
+    city      String?
+    zip       String?
+    lon       String?
+    lat       String?
+    updatedAt DateTime @updatedAt
+    Stock     Stock[]
+}
+
+model Stock {
+    beer      Beers    @relation(fields: [beerId], references: [vmp_id])
+    store     Stores   @relation(fields: [storeId], references: [store_id])
+    quantity  Int
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    beerId  String
+    storeId String
+
+    @@id([beerId, storeId])
+}

@@ -1,0 +1,5 @@
+# Svinmonopolet
+
+## Client
+
+## Server

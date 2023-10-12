@@ -1,0 +1,143 @@
+export const vinmonopoletBeerNameSuffixes = [
+  '2025',
+  '2024',
+  '2023',
+  '2022',
+  '2021',
+  '2020',
+  '2019',
+  '2018',
+  '2017',
+  '2016',
+  '2015',
+  '2014',
+  '2013',
+  '2012',
+  '2011',
+  '2010',
+  '2009',
+  'Belgian',
+  'Fruited Sour Ale',
+  'Sour Ale',
+  'BA Cherry Sour',
+  'Vanilla Oatmeal Stout',
+  'Triple Pastry Sour',
+  'Tripel',
+  'Altbier',
+  'New England IPA',
+  'Classic IPA',
+  'Smoked Lager',
+  'Fruited Sour',
+  'Craft Stout',
+  'Wet Hopped Lager',
+  'West Coast',
+  'Hop Fury',
+  'Single Malt Single Hop',
+  'Lager',
+  'Brun Staut',
+  'Hazy Pale Ale',
+  'Raspberry Brown Sour',
+  'Brown Sour',
+  'Raspberry',
+  'Toffee Cinnabun Ultra Pastry Stout',
+  'Ultra Pastry Stout',
+  'Imperial Chocolate Pastry Stout',
+  'Pastry Stout',
+  'Old Ale',
+  'Dobbel',
+  'APA',
+  'IPA',
+  'Barrel-Aged',
+  'Pastry Stout',
+  'Barleywine',
+  'Imperial',
+  'Stout',
+  'Red Ale',
+  'Witbier',
+  'Doppelbock',
+  'Hefeweissbier',
+  'Pastry',
+  'Quadrupel',
+  'Coffee',
+  'Amber Ale',
+  'Porter',
+  'Barley Wine',
+  'Saison',
+  'Red IPA',
+  'Amber',
+  'American Barley Wine',
+  'East Coast IPA',
+  'American Pale Ale',
+  'Pale Ale',
+  'Double IPA',
+  'Blonde',
+  'Barrel Aged',
+  'Mixed Fermentation Sour',
+  'TIPA',
+  'NEIPA',
+  'Neipa',
+  'DDH',
+  'x ',
+  'X ',
+  '&',
+  'chocolate stout',
+  'patissierestout',
+  'Sour IPA',
+  'Sour',
+  'DIPA',
+  'No Coast IPA',
+  'NE Pale Ale',
+  'Celebration',
+  'American Brown',
+  'Blond',
+  'Wild Ale',
+  'Wild Strawberry & Kiwi',
+  'Farmhouse Pale Ale',
+  'Farmhouse Ale',
+  'Farmhouse',
+  'Unfiltered',
+  'Edition',
+  'Fruit Aged Ale',
+  'White Ale',
+  'With Pine Bud',
+  'au Froment',
+  'Scotch Heather Ale',
+  'Bourbon BA',
+  'Dormuntder Export',
+  'Fatlagret',
+  'Trippel',
+  'Tranebær',
+  'Triple',
+  'SMaSH',
+  'Ale',
+  'Brut',
+  'Double',
+  'Triple',
+  'Trippel',
+];
+
+/**
+ * A function that tries to reformat the name of the beer coming from Vinmonopolet better search in Untappd.
+ * Usually this is just stripping the style at end of the name (APA, IPA, imperial stout etc), because
+ * vinmonopolet loves to add differnet stuff to the name.
+ * am name Vinmonpolet beer name
+ * @returns@par
+ */
+export function formatVinmnopoletBeerName(name: string) {
+  const regex = new RegExp('\\b(' + vinmonopoletBeerNameSuffixes.join('|') + ')\\b', 'g');
+  return (name || '').replace(regex, '').replace(/[]{2,}/, ' ');
+}
+
+export function formatVinmnopoletBeerNameNew(str: string) {
+  const x = formatVinmnopoletBeerName(str);
+  const wordsArray = x.split(' ');
+  const index = wordsArray.findIndex((word) =>
+    vinmonopoletBeerNameSuffixes.includes(word),
+  );
+
+  if (index !== -1) {
+    return wordsArray.slice(0, index).join(' ');
+  }
+
+  return str;
+}

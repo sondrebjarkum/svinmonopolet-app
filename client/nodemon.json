@@ -1,0 +1,6 @@
+{
+  "watch": ["svinmonopolet_server/src"],
+  "ext": ".ts,.js",
+  "ignore": [],
+  "exec": "npx ts-node ./svinmonopolet_server/src/index.ts"
+}
